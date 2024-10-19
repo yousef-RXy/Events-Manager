@@ -27,7 +27,7 @@ app.get('/events', async (req, res) => {
   let events = JSON.parse(eventsFileContent);
 
   if (search) {
-    events = events.filter((event) => {
+    events = events.filter(event => {
       const searchableText = `${event.title} ${event.description} ${event.location}`;
       return searchableText.toLowerCase().includes(search.toLowerCase());
     });
@@ -38,7 +38,7 @@ app.get('/events', async (req, res) => {
   }
 
   res.json({
-    events: events.map((event) => ({
+    events: events.map(event => ({
       id: event.id,
       title: event.title,
       image: event.image,
@@ -61,7 +61,7 @@ app.get('/events/:id', async (req, res) => {
   const eventsFileContent = await fs.readFile('./data/events.json');
   const events = JSON.parse(eventsFileContent);
 
-  const event = events.find((event) => event.id === id);
+  const event = events.find(event => event.id === id);
 
   if (!event) {
     return res
@@ -131,7 +131,7 @@ app.put('/events/:id', async (req, res) => {
   const eventsFileContent = await fs.readFile('./data/events.json');
   const events = JSON.parse(eventsFileContent);
 
-  const eventIndex = events.findIndex((event) => event.id === id);
+  const eventIndex = events.findIndex(event => event.id === id);
 
   if (eventIndex === -1) {
     return res.status(404).json({ message: 'Event not found' });
@@ -155,7 +155,7 @@ app.delete('/events/:id', async (req, res) => {
   const eventsFileContent = await fs.readFile('./data/events.json');
   const events = JSON.parse(eventsFileContent);
 
-  const eventIndex = events.findIndex((event) => event.id === id);
+  const eventIndex = events.findIndex(event => event.id === id);
 
   if (eventIndex === -1) {
     return res.status(404).json({ message: 'Event not found' });
